@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Echarts 地图</title>
+</head>
+<body> 
+  
+    <div id="main" style="width:600px;height:500px;border:1px solid red"></div> 
+     
+    <script type="text/javascript" src="./js/jquery.min.js"></script>  
+    <script src="./js/echarts.min.js"></script>    
+    <script src="./js/map/china.js"></script>
+    
+    <script>
+
+    
+    
+    var chart = echarts.init(document.getElementById('main'));
+    
+    $.get('./js/map/china.json', function (chinaJson) {
+            echarts.registerMap('china', chinaJson);
+    });
+
+    chart.setOption({
+        title: {
+            text: '各省电站数量分布',
+            subtext: '纯属虚构',
+            left: 'center'
+        },
+        tooltip: {
+            trigger: 'item'
+        },
+        visualMap: {
+            min: 0,
+            max: 10,
+            left: 'left',
+            top: 'bottom',
+            text: ['多','少'],           // 文本，默认为数值文本
+            calculable: true
+        },
+        series: [
+            {
+                name: '数量',
+                type: 'map',
+                mapType: 'china',
+                label: {
+                    normal: {
+                        show: true
+                    },
+                    emphasis: {
+                        show: true
+                    }
+                },
+                data:[],
+            },
+        ]
+    });
+
+    $.getJSON('./text.json',function(data){
+        chart.setOption({
+            series:[
+                {
+                    data:data,
+                }
+            ]
+        })
+    })
+
+    
+    </script>
+  
+</body>  
+</html>  
