@@ -1,5 +1,5 @@
 $(function(){
-    map.initialize("./text.json","./js/map/");//地图初始化(配置json文件的路径)
+    map.initialize("./text.json","./js/map/");//地图初始化(分别配置地图json文件的路径和内容json文件的路径)
 });
 
 var map=new Object();
@@ -45,6 +45,8 @@ map.initialize = function(contentUrl,mapUrl){
             $.get(mapUrl+'china.json', function (chinaJson) {
                 echarts.registerMap('china',chinaJson);
                 
+//                title--地图页面的title
+//                name--地图的拼音名字
                 var option = function(title,name){
                     return {
                         backgroundColor: '#404a59',
