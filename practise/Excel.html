@@ -1,10 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>FDF在线预览插件</title>
+    <meta charset="UTF-8">
+    <title>demo</title>
+    <style>
+    body{
+        margin:0;
+        padding:0;
+        font-size:100px;
+    }
+    .box{
+        width:1600px;
+        height:1200px;
+        overflow:hidden;
+        position:relative;
+    }
+    .a{
+        width:100px;
+        height:100px;
+        background-color:#DC143C;
+        position:fixed;
+        top:0;
+        left:0;
+        z-index:999;
+    }
+    .b{
+        height:100px;
+        padding-left:100px;
+        background-color:#6495ED;
+    }
+    .c{
+        width:100px;
+        padding-top:100px;
+        word-wrap:break-word;
+        background-color:#D2B48C;
+    }
+    .d{
+        background-color:#808080;
+        z-index:0;
+        padding-top:100px;
+        padding-left:100px;
+    }
+    </style>
 </head>
 <body>
-	
-</body>
-</html>
+    <div class="box">
+        <div class="a"></div>
+        <div class="b">12345678987654321234567</div>
+        <div class="c">1234567</div>
+        <div class="d">1234567898765432123456789<br>234567898765432123456789<br>34567898765432123456789<br>4567898765432123456789<br>567898765432123456789<br>67898765432123456789<br>7898765432123456789</div>
+    </div>
+    
+
+
+    <script src="http://libs.baidu.com/jquery/1.9.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+            var left = $(document).scrollLeft();
+            // console.log(left);
+            var top = $(document).scrollTop();
+
+            $('.b').css({'position':'absolute','left':-left,'top':top,'z-index':'1'});
+            $('.c').css({'position':'absolute','left':left,'top':-top,'z-index':'1'});
+            $('.d').css({'position':'absolute','left':left,'top':-top,'z-index':'0'})
+            $(document).scroll(function(){
+                // console.log("滚动了！")
+                var Left = $(document).scrollLeft();
+                var Top = $(document).scrollTop();
+                // console.log(Top);
+                if(Left != left){
+                    // console.log("左右滚动！");
+                    $('.c').css({'position':'fixed','z-index':'999'});
+                }else if(Top != top){
+                    // console.log("上下滚动！");
+                    $('.b').css({'position':'fixed','z-index':'999'});
+                }
+                left = Left;
+                top = Top;
+                // console.log(left);
+                // console.log(top);
+                $('.b').css({'position':'absolute','left':-left,'top':top,'z-index':'1'});
+                $('.c').css({'position':'absolute','left':left,'top':-top,'z-index':'1'});
+                $('.d').css({'position':'absolute','left':-left,'top':-top,'z-index':'0'});
+            });
+        })
+    </script>
+</body>  
+</html>  
